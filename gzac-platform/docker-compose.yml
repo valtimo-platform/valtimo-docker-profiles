@@ -36,15 +36,15 @@ services:
 
     # Valtimo services
 
-    valtimo-core-db:
-        container_name: valtimo-core-db
+    gzac-core-db:
+        container_name: gzac-core-db
         image: mysql:5.7
         ports:
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: valtimo-core
-            MYSQL_USER: valtimo
+            MYSQL_DATABASE: gzac-core
+            MYSQL_USER: gzac
             MYSQL_PASSWORD: password
             MYSQL_ROOT_HOST: "%"
         command: [
@@ -58,7 +58,7 @@ services:
                 "--sql_mode=NO_ENGINE_SUBSTITUTION"
         ]
         volumes:
-            - valtimo-core-db-data:/var/lib/mysql # persist data even if container shuts down
+            - gzac-core-db-data:/var/lib/mysql # persist data even if container shuts down
 
     valtimo-core-keycloak:
         container_name: valtimo-core-keycloak
@@ -336,4 +336,4 @@ services:
             - ./imports/open-formulieren/private_media:/private_media
 
 volumes:
-    valtimo-core-db-data: #enabled persistence
+    gzac-core-db-data: #enabled persistence
