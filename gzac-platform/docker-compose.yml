@@ -8,8 +8,8 @@ services:
             - gzac-portal-keycloak-db
         image: jboss/keycloak:15.0.0
         volumes:
-            - ./imports:/opt/jboss/keycloak/imports
-            - ./exports:/opt/jboss/keycloak/exports
+            - ./imports/keycloak:/opt/jboss/keycloak/imports
+            - ./imports/keycloak/exports:/opt/jboss/keycloak/exports
         ports:
             - "8093:8080"
         environment:
