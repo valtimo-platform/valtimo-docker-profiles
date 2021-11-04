@@ -15,7 +15,7 @@ services:
         environment:
             KEYCLOAK_USER: admin
             KEYCLOAK_PASSWORD: admin
-            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/portal-realm-gzac.json
+            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/gzac-portal-realm.json
             DB_VENDOR: mysql
             DB_ADDR: gzac-portal-keycloak-db
             DB_USER: keycloak
