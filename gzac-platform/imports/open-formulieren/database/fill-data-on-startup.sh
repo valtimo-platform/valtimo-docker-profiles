@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ">>>>  Waiting until Open Formulieren has initialized the database <<<<"
-useradd notifications
+useradd openforms
 while true
 do
     verifier=$(psql -U openforms -d openforms -t -A -c "select count(id)>0 from auth_permission")

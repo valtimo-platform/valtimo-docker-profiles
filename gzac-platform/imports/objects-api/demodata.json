@@ -853,13 +853,13 @@
         "fields": {
             "label": "Objecttypen API",
             "api_type": "orc",
-            "api_root": "http://host.docker.internal:8001/api/v1/",
+            "api_root": "http://host.docker.internal:8011/api/v1/",
             "client_id": "",
             "secret": "",
             "auth_type": "api_key",
             "header_key": "Authorization",
             "header_value": "Token cd63e158f3aca276ef284e3033d020a22899c728",
-            "oas": "http://host.docker.internal:8001/api/v1/schema/openapi.yaml",
+            "oas": "http://host.docker.internal:8011/api/v1/schema/openapi.yaml",
             "nlx": "",
             "user_id": "",
             "user_representation": ""
