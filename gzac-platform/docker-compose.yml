@@ -15,7 +15,7 @@ services:
         environment:
             KEYCLOAK_USER: admin
             KEYCLOAK_PASSWORD: admin
-            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/gzac-portal-realm.json
+            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/portal-realm-gzac.json
             DB_VENDOR: mysql
             DB_ADDR: gzac-portal-keycloak-db
             DB_USER: keycloak
@@ -178,7 +178,7 @@ services:
             - "8011:8000"
         environment:
             - CORS_ALLOW_ALL_ORIGINS=true
-            - SECRET_KEY=${SECRET_KEY:-fgv=c0hz&tl*8*3m3893@m+1pstrvidc9e^5@fpspmg%cy$15d}
+            - SECRET_KEY=${SECRET_KEY:-fgv=c0hz&tl*8*3m3893@m+1pstrvidc9e^5@fpspmg%cy$$15d}
             - DJANGO_SETTINGS_MODULE=objecttypes.conf.docker
             - DB_PORT=5432
             - DB_HOST=database-objecttypes-api
@@ -217,9 +217,9 @@ services:
             - DB_PASSWORD=notifications
             - DEBUG=true
             - RABBITMQ_HOST=rabbitmq
-            - PUBLISH_BROKER_URL=amqp://guest:guest@rabbitmq:5673/%2F
-            - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5673//
-            - CELERY_RESULT_BACKEND=redis://redis-open-notificaties:6379/1
+            - PUBLISH_BROKER_URL=redis://redis-open-notificaties:6379/0
+            - CELERY_BROKER_URL=redis://redis-open-notificaties:6379/0
+            - CELERY_RESULT_BACKEND=redis://redis-open-forms:6379/0
             - CELERY_LOGLEVEL=DEBUG
             - CELERY_WORKER_CONCURRENCY=${CELERY_WORKER_CONCURRENCY:-4}
 
@@ -230,7 +230,7 @@ services:
         command: /celery_worker.sh
 
     database-open-notificaties:
-        image: postgres
+        image: postgres:13.5  # open-notificaties doesn't work with postgres 14.
         container_name: database-open-notificaties
         ports:
             - "54319:5432"
