@@ -15,11 +15,15 @@ services:
         environment:
             KEYCLOAK_USER: admin
             KEYCLOAK_PASSWORD: admin
-            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/portal-realm-gzac.json
             DB_VENDOR: mysql
             DB_ADDR: gzac-portal-keycloak-db
             DB_USER: keycloak
             DB_PASSWORD: keycloak
+        command:
+            - "-Dkeycloak.migration.action=import"
+            - "-Dkeycloak.migration.provider=singleFile"
+            - "-Dkeycloak.migration.file=/opt/jboss/keycloak/imports/portal-realm-gzac.json"
+            - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
 
     gzac-portal-keycloak-db:
         container_name: gzac-portal-keycloak-db
@@ -274,7 +278,7 @@ services:
         environment: &web_env
             - CORS_ALLOW_ALL_ORIGINS=true
             - DJANGO_SETTINGS_MODULE=openforms.conf.docker
-            - SECRET_KEY=${SECRET_KEY:-@r0w-0(&apjfde5fl6h23!vn)r1ldkp1c_d2#!$did4z5hun4a}
+            - SECRET_KEY=${SECRET_KEY:-@r0w-0(&apjfde5fl6h23!vn)r1ldkp1c_d2#!$$did4z5hun4a}
             - DB_NAME=openforms
             - DB_USER=openforms
             - DB_PASSWORD=openforms
