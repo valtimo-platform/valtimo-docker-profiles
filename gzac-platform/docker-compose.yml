@@ -27,7 +27,7 @@ services:
 
     gzac-portal-keycloak-db:
         container_name: gzac-portal-keycloak-db
-        image: mysql:latest
+        image: mysql:8.0.27
         ports:
             - "3307:3306"
         cap_add:
@@ -42,7 +42,7 @@ services:
 
     gzac-core-db:
         container_name: gzac-core-db
-        image: mysql:5.7
+        image: mysql:8.0.27
         ports:
             - "3306:3306"
         environment:
@@ -85,7 +85,7 @@ services:
 
     valtimo-core-keycloak-db:
         container_name: valtimo-core-keycloak-db
-        image: mysql:latest
+        image: mysql:8.0.27
         ports:
             - "3308:3306"
         cap_add:
@@ -99,7 +99,7 @@ services:
     # Common ground VNG services
 
     openzaak:
-        image: openzaak/open-zaak
+        image: openzaak/open-zaak:1.5.0
         container_name: openzaak
         environment:
             - DB_HOST=openzaak-postgis
@@ -120,7 +120,7 @@ services:
             - "8001:8000"
 
     openzaak-postgis:
-        image: postgis/postgis
+        image: mdillon/postgis:11
         container_name: openzaak-postgis
         environment:
             - POSTGRES_USER=openzaak
@@ -132,7 +132,7 @@ services:
             - ./imports/open-zaak:/docker-entrypoint-initdb.d
 
     openzaak-redis:
-        image: redis
+        image: redis:6.2.6
         container_name: openzaak-redis
 
     # Additional services
@@ -167,7 +167,7 @@ services:
             - ./imports/objects-api:/app/src/objects/fixtures
 
     database-objects-api:
-        image: mdillon/postgis
+        image: postgis/postgis:13-3.1
         container_name: database-objects-api
         ports:
             - "54321:5432"
@@ -193,7 +193,7 @@ services:
             - ./imports/objecttypes-api:/app/src/objecttypes/fixtures
 
     database-objecttypes-api:
-        image: postgres
+        image: postgres:14.1
         container_name: database-objecttypes-api
         ports:
             - "54320:5432"
@@ -223,7 +223,7 @@ services:
             - RABBITMQ_HOST=rabbitmq
             - PUBLISH_BROKER_URL=redis://redis-open-notificaties:6379/0
             - CELERY_BROKER_URL=redis://redis-open-notificaties:6379/0
-            - CELERY_RESULT_BACKEND=redis://redis-open-forms:6379/0
+            - CELERY_RESULT_BACKEND=redis://redis-open-notificaties:6379/0
             - CELERY_LOGLEVEL=DEBUG
             - CELERY_WORKER_CONCURRENCY=${CELERY_WORKER_CONCURRENCY:-4}
 
@@ -246,13 +246,13 @@ services:
             - ./imports/open-notificaties:/docker-entrypoint-initdb.d
 
     redis-open-notificaties:
-        image: redis
+        image: redis:6.2.6
         container_name: redis-open-notificaties
 
     # Open forms
 
     database-open-forms:
-        image: postgres
+        image: postgres:14.1
         container_name: database-open-forms
         ports:
             - "54322:5432"
@@ -263,17 +263,17 @@ services:
             - ./imports/open-formulieren:/docker-entrypoint-initdb.d
 
     redis-open-forms:
-        image: redis
+        image: redis:6.2.6
         container_name: redis-open-forms
 
     sdk-open-forms:
-        image: openformulieren/open-forms-sdk
+        image: openformulieren/open-forms-sdk:sprint-10
         container_name: sdk-open-forms
         ports:
             - "8005:80"
 
     web-open-forms:
-        image: openformulieren/open-forms
+        image: openformulieren/open-forms:sprint-10
         container_name: web-open-forms
         environment: &web_env
             - CORS_ALLOW_ALL_ORIGINS=true
@@ -303,7 +303,7 @@ services:
             - sdk-open-forms
 
     celery-open-forms:
-        image: openformulieren/open-forms
+        image: openformulieren/open-forms:sprint-10
         container_name: celery-open-forms
         environment: *web_env
         command: /celery_worker.sh
@@ -314,7 +314,7 @@ services:
             - redis-open-forms
 
     celery-beat:
-        image: openformulieren/open-forms
+        image: openformulieren/open-forms:sprint-10
         container_name: celery-beat
         environment: *web_env
         command: /celery_beat.sh
@@ -323,7 +323,7 @@ services:
             - redis-open-forms
 
     celery-flower:
-        image: mher/flower
+        image: mher/flower:0.9.7
         container_name: celery-flower
         environment: *web_env
         ports:
@@ -333,7 +333,7 @@ services:
             - celery-open-forms
 
     busybox:
-        image: busybox
+        image: busybox:1.34.1
         container_name: busybox
         command: /bin/chown -R 1000 /private_media
         volumes:
@@ -342,7 +342,7 @@ services:
     # Open klant
 
     database-open-klant:
-        image: postgres
+        image: postgres:14.1
         container_name: database-open-klant
         ports:
             - "54323:5432"
@@ -353,11 +353,11 @@ services:
             - ./imports/open-klanten:/docker-entrypoint-initdb.d
 
     redis-open-klant:
-        image: redis
+        image: redis:6.2.6
         container_name: redis-open-klant
 
     web-open-klant:
-        image: maykinmedia/open-klant
+        image: maykinmedia/open-klant:latest
         container_name: web-open-klant
         environment:
             - DJANGO_SETTINGS_MODULE=openklant.conf.docker
