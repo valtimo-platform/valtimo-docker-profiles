@@ -58,3 +58,7 @@ UPDATE notifications_notificationsconfig SET api_root = 'http://host.docker.inte
 
 DELETE FROM zgw_consumers_service where id = 1
 INSERT INTO zgw_consumers_service VALUES(1, 'Open formulieren', 'nrc', 'http://host.docker.internal:8002/api/v1/', 'openzaak', 'openzaak', 'zgw', '', '', 'http://host.docker.internal:8002/api/v1/schema/openapi.yaml', '', '', '');
+
+INSERT INTO zaken_zaak values (1, uuid_generate_v4(), 'ZAAK-2021-0000000001', '051845623', '', '', '', now(), '051845623', now(), NULL, NULL, NULL, NULL, '{}', '', 'openbaar', '', NULL, NULL, '', NULL, false, '', '', NULL, 'nog_te_archiveren', NULL, 1, NULL);
+INSERT INTO zaken_rol VALUES (1, uuid_generate_v4(), '', 'natuurlijk_persoon', '', 'Aanvrager', 'initiator', 'Test rol', now(), 'gemachtigde', 1, 1);
+INSERT INTO zaken_natuurlijkpersoon VALUES (1, '569312863', '', '', '', '', '', '', 'm', '', 1, NULL, NULL);
