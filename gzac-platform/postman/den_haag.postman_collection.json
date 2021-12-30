@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "458bf815-000c-418b-ade6-b6a2ede0574f",
+		"name": "Den Haag",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ContactMomenten",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponseBody = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"contactMomentUrl\", url);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2Mzk1ODcyNjMsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.yXLeNiBF4Il0JpIy-ANGdsfv9VhhzzyIpXeHLMCHNgc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"url\": \"http://example.com\",\n  \"volgendContactmoment\": \"http://example.com\",\n  \"bronorganisatie\": \"051845623\",\n  \"registratiedatum\": \"2020-08-24T14:15:22Z\",\n  \"kanaal\": \"mail\",\n  \"voorkeurskanaal\": \"string\",\n  \"voorkeurstaal\": \"str\",\n  \"tekst\": \"mail-content\",\n  \"onderwerpLinks\": [\n    \"http://example.com\"\n  ],\n  \"initiatiefnemer\": \"gemeente\",\n  \"medewerker\": \"http://example.com\",\n  \"medewerkerIdentificatie\": {\n    \"identificatie\": \"string\",\n    \"achternaam\": \"Schuijtemaker\",\n    \"voorletters\": \"string\",\n    \"voorvoegselAchternaam\": \"string\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8006/contactmomenten/api/v1/contactmomenten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8006",
+					"path": [
+						"contactmomenten",
+						"api",
+						"v1",
+						"contactmomenten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ContactMomenten",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponseBody = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"contactMomentUrl\", jsonResponseBody.results[0].url);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2Mzk1ODcyNjMsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.yXLeNiBF4Il0JpIy-ANGdsfv9VhhzzyIpXeHLMCHNgc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8006/contactmomenten/api/v1/contactmomenten?ordering=-registratiedatum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8006",
+					"path": [
+						"contactmomenten",
+						"api",
+						"v1",
+						"contactmomenten"
+					],
+					"query": [
+						{
+							"key": "ordering",
+							"value": "-registratiedatum"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "KlantContactMomenten",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2Mzk1ODcyNjMsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.yXLeNiBF4Il0JpIy-ANGdsfv9VhhzzyIpXeHLMCHNgc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contactmoment\": \"http://localhost:8006/contactmomenten/api/v1/contactmomenten/8ee627ff-c406-4e84-b87e-3b58047bacfe\",\n    \"klant\": \"http://localhost:8006/klanten/api/v1/klanten/5d479908-fbb7-49c2-98c9-9afecf8de79a\",\n    \"rol\": \"belanghebbende\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8006/contactmomenten/api/v1/klantcontactmomenten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8006",
+					"path": [
+						"contactmomenten",
+						"api",
+						"v1",
+						"klantcontactmomenten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "KlantContactMomenten",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2Mzk1ODcyNjMsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.yXLeNiBF4Il0JpIy-ANGdsfv9VhhzzyIpXeHLMCHNgc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8006/contactmomenten/api/v1/klantcontactmomenten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8006",
+					"path": [
+						"contactmomenten",
+						"api",
+						"v1",
+						"klantcontactmomenten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObjectContactMomenten",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2Mzk1ODcyNjMsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.yXLeNiBF4Il0JpIy-ANGdsfv9VhhzzyIpXeHLMCHNgc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contactmoment\": \"http://host.docker.internal:8006/contactmomenten/api/v1/contactmomenten/8ee627ff-c406-4e84-b87e-3b58047bacfe\",\n    \"object\": \"http://host.docker.internal:8001/zaken/api/v1/zaken/04c38b4b-32b6-4282-9e0f-45dd68cd5fe3\",\n    \"objectType\": \"zaak\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8006/contactmomenten/api/v1/objectcontactmomenten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8006",
+					"path": [
+						"contactmomenten",
+						"api",
+						"v1",
+						"objectcontactmomenten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Klanten",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponseBody = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"klantUrl\", jsonResponseBody.results[0].url);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2Mzk1ODcyNjMsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.yXLeNiBF4Il0JpIy-ANGdsfv9VhhzzyIpXeHLMCHNgc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8006/klanten/api/v1/klanten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8006",
+					"path": [
+						"klanten",
+						"api",
+						"v1",
+						"klanten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "enkelvoudiginformatieobjecten",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2NDA1OTM4OTEsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.VIBqTNxJzAJjcNFWtSGud9CGYgPF-xXcEBQOoOr4Twg"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bronorganisatie\": \"051845623\",\n  \"creatiedatum\": \"2021-12-25\",\n  \"titel\": \"Title\",\n  \"auteur\": \"Klaas postman\",\n  \"bestandsnaam\": \"File name\",\n  \"taal\": \"nld\",\n  \"inhoud\": \"dGVzdA==\",\n  \"informatieobjecttype\": \"http://example.com\",\n  \"status\": \"definitief\",\n  \"indicatieGebruiksrecht\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/documenten/api/v1/enkelvoudiginformatieobjecten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"documenten",
+						"api",
+						"v1",
+						"enkelvoudiginformatieobjecten"
+					]
+				},
+				"description": "https://documenten-api.vng.cloud/api/v1/schema/#operation/enkelvoudiginformatieobject_create"
+			},
+			"response": []
+		},
+		{
+			"name": "zaken",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHWkFDX1JpdGVuc2UiLCJpYXQiOjE2NDA1OTM4OTEsImNsaWVudF9pZCI6InZhbHRpbW9fY2xpZW50IiwidXNlcl9pZCI6IjU2OTMxMjg2MyIsInVzZXJfcmVwcmVzZW50YXRpb24iOiJCU046NTY5MzEyODYzIn0.VIBqTNxJzAJjcNFWtSGud9CGYgPF-xXcEBQOoOr4Twg"
+					},
+					{
+						"key": "Accept-Crs",
+						"value": "EPSG:4326",
+						"type": "text"
+					},
+					{
+						"key": "Content-Crs",
+						"value": "EPSG:4326",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bronorganisatie\": \"051845623\",\n  \"creatiedatum\": \"2021-12-25\",\n  \"titel\": \"Title\",\n  \"auteur\": \"Klaas postman\",\n  \"bestandsnaam\": \"File name\",\n  \"taal\": \"nld\",\n  \"inhoud\": \"dGVzdA==\",\n  \"informatieobjecttype\": \"http://example.com\",\n  \"status\": \"definitief\",\n  \"indicatieGebruiksrecht\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/zaken/api/v1/zaken/04c38b4b-32b6-4282-9e0f-45dd68cd5fe3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"zaken",
+						"api",
+						"v1",
+						"zaken",
+						"04c38b4b-32b6-4282-9e0f-45dd68cd5fe3"
+					]
+				},
+				"description": "https://documenten-api.vng.cloud/api/v1/schema/#operation/enkelvoudiginformatieobject_create"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
