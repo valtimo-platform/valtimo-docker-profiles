@@ -374,5 +374,56 @@ services:
         depends_on:
             - database-open-klant
 
+    # Den Haag Mail
+
+    mail-database:
+        image: mariadb:10.5.8
+        container_name: mail-database
+        ports:
+            - "3309:3306"
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: somewordpress
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+        volumes:
+            - mail_database_data:/var/lib/mysql
+
+    mail-wordpress:
+        image: wordpress:5
+        container_name: mail-wordpress
+        ports:
+            - "8012:80"
+        restart: always
+        environment:
+            WORDPRESS_DB_HOST: mail-database
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+            WORDPRESS_DB_NAME: wordpress
+        depends_on:
+            - mail-database
+            - mail-mailhog
+        volumes:
+            - mail_wordpress_data:/var/www/html
+            - ./imports/den-haag-email/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+    mail-mailhog:
+        image: mailhog/mailhog:v1.0.1
+        container_name: mail-mailhog
+        environment:
+            MH_STORAGE: maildir
+            MH_MAILDIR_PATH: /home/mailhog
+            VIRTUAL_HOST: mailhog.local
+            VIRTUAL_PORT: 8025
+        ports:
+            - "1025:1025" # smtp server
+            - "8025:8025" # web ui
+        volumes:
+            - mail_mailhog_data:/home/mailhog
+
 volumes:
     gzac-core-db-data: #enabled persistence
+    mail_database_data: {}
+    mail_wordpress_data: {}
+    mail_mailhog_data: {}
