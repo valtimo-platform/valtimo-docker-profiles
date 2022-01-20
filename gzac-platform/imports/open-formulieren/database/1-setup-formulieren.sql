@@ -15,6 +15,9 @@
  */
 
 INSERT INTO public.accounts_user VALUES (1, 'pbkdf2_sha256$150000$qF3jNl22Wjtd$24lTfmZHVIyc1k+0nwM7fD6eRr81Lab35yo6au/9L5E=', '2021-10-06 13:24:20.779516+00', true, 'admin', '', '', 'admin@example.com', true, true, '2021-10-06 13:23:08.927585+00');
+INSERT INTO public.accounts_user VALUES (2, 'pbkdf2_sha256$150000$PmerZOpuZ9aa$nHi2F74g6LHb+vH6iOQZUrmq41hRK0KFKggUUVNkYl4=', NULL, false, 'valtimo-api-client', '', '', '', true, true, '2022-01-14 15:06:33.000');
+
+INSERT INTO public.authtoken_token VALUES ('3ca04f4c11159811877444fdb1e019b7eac13f78', '2022-01-17 15:07:12.522', 2);
 
 INSERT INTO public.forms_form VALUES (1, 'leningaanvraag', 'leningaanvraag', true, 'ce7b0038-547e-48a5-a0b3-9c4fffb56048', NULL, 'objects_api', '{"objecttype": "http://host.docker.internal:8011/api/v1/objecttypes/021f685e-9482-4620-b157-34cd4003da6b", "organisatie_rsin": "051845623", "objecttype_version": 1, "productaanvraag_type": "lening", "informatieobjecttype_attachment": "http://host.docker.internal:8001/catalogi/api/v1/informatieobjecttypen/efc332f2-be3b-4bad-9e3c-49a6219c92ad", "informatieobjecttype_submission_report": "http://host.docker.internal:8001/catalogi/api/v1/informatieobjecttypen/efc332f2-be3b-4bad-9e3c-49a6219c92ad"}', false, false, '{digid,digid-mock}', '<p>Bedankt voor de aanvraag</p>', false, '', '', '', '', true, '', '{}', NULL, NULL, '', NULL, '', NULL, '', '', '', '');
 
