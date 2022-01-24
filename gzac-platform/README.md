@@ -8,7 +8,7 @@
 
 ### Setup Wordpress
 1. Go to http://localhost:8012/wp-admin/ (Wordpress)
-2. Create Admin account
+2. Create Admin account (admin/admin-password)
 3. Login with new Admin account
 4. -> Plugins -> Add New -> Upload Plugin -> (dh-wordpress-email-template-plugin-1.2.1.zip) -> Install Now -> Activate Plugin
 5. -> Plugins -> Add New -> Search `WP Mail SMTP by WPForms` -> Install Now -> Activate -> Go back to the Dashboard
