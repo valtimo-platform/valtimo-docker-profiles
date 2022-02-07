@@ -1878,7 +1878,7 @@
                             "geboortedatum": "01-01-1970",
                             "toestemming": true
                         },
-                        "submitted_data": {
+                        "verzonden_data": {
                             "voornaam": "Jan",
                             "achternaam": "Smit",
                             "geboortedatum": "01-01-1971",
@@ -1914,7 +1914,7 @@
                         },
                         "additionalProperties": false
                     },
-                    "submitted_data": {
+                    "verzonden_data": {
                         "type": "object",
                         "patternProperties": {
                             "^.*$": {
