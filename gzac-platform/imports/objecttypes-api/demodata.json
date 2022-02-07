@@ -1935,11 +1935,28 @@
                         ]
                     }
                 },
-                "required": [
-                    "bsn",
-                    "verwerker_taak_id",
-                    "formulier_id",
-                    "status"
+                "allOf": [
+                    {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "bsn"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "kvk"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "required": [
+                            "verwerker_taak_id",
+                            "formulier_id",
+                            "status"
+                        ]
+                    }
                 ]
             },
             "status": "draft"
