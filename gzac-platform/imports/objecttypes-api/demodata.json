@@ -1836,7 +1836,7 @@
         "model": "core.objecttype",
         "pk": 5,
         "fields": {
-            "uuid": "3e852115-277a-4570-873a-9a64be3aeb34\n\n",
+            "uuid": "3e852115-277a-4570-873a-9a64be3aeb34",
             "name": "taak",
             "name_plural": "taken",
             "description": "Taken",
