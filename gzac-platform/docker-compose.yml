@@ -39,8 +39,7 @@ services:
 
     gzac-core-db:
         container_name: gzac-core-db
-        image: mysql:8.0.27
-        platform: linux/amd64
+        image: mysql/mysql-server:8.0.28-1.2.7-server # version of oracle managed image that works on x86 and arm64
         ports:
             - "3306:3306"
         environment:
@@ -151,17 +150,30 @@ services:
         platform: linux/amd64
         ports:
             - "8010:8000"
-        environment:
+        environment: &objects-env
             - CORS_ALLOW_ALL_ORIGINS=true
             - SECRET_KEY=${SECRET_KEY:-1(@f(-6s_u(5fd&1sg^uvu2s(c-9sapw)1era8q&)g)h@cwxxg}
             - DJANGO_SETTINGS_MODULE=objects.conf.docker
             - DB_PORT=5432
             - DB_HOST=database-objects-api
             - DEBUG=true
-            - TWO_FACTOR_FORCE_OTP_ADMIN=False
+            - TWO_FACTOR_FORCE_OTP_ADMIN=False # this is not available yet in this version
             - TWO_FACTOR_PATCH_ADMIN=False
+        depends_on:
+            - database-objects-api
+
+    objects-api-import:
+        image: maykinmedia/objects-api:2.0.0
+        container_name: objects-api-import
+        platform: linux/amd64
+        environment: *objects-env
+        # in the current version of django it is not possible to create a new user with password without user interaction by using the createsuperuser command
+        command: sh init/init.sh
         volumes:
-            - ./imports/objects-api:/app/src/objects/fixtures
+            - ./imports/objects-api/fixtures:/app/src/objects/fixtures
+            - ./imports/objects-api/init:/app/init
+        depends_on:
+            - objects-api
 
     database-objects-api:
         image: postgis/postgis:13-3.1
@@ -179,17 +191,29 @@ services:
         platform: linux/amd64
         ports:
             - "8011:8000"
-        environment:
+        environment: &objecttypes-env
             - CORS_ALLOW_ALL_ORIGINS=true
             - SECRET_KEY=${SECRET_KEY:-fgv=c0hz&tl*8*3m3893@m+1pstrvidc9e^5@fpspmg%cy$$15d}
             - DJANGO_SETTINGS_MODULE=objecttypes.conf.docker
             - DB_PORT=5432
             - DB_HOST=database-objecttypes-api
             - DEBUG=true
-            - TWO_FACTOR_FORCE_OTP_ADMIN=False
+            - TWO_FACTOR_FORCE_OTP_ADMIN=False # this is not available yet in this version
             - TWO_FACTOR_PATCH_ADMIN=False
+        depends_on:
+            - database-objecttypes-api
+
+    objecttypes-api-import:
+        image: maykinmedia/objecttypes-api:1.1.1
+        container_name: objecttypes-api-import
+        platform: linux/amd64
+        environment: *objecttypes-env
+        command: sh init/init.sh
         volumes:
-            - ./imports/objecttypes-api:/app/src/objecttypes/fixtures
+            - ./imports/objecttypes-api/fixtures:/app/src/objecttypes/fixtures
+            - ./imports/objecttypes-api/init:/app/init
+        depends_on:
+            - objecttypes-api
 
     database-objecttypes-api:
         image: postgres:14.1
@@ -203,7 +227,7 @@ services:
     # Open notificaties
 
     open-notificaties:
-        image: openzaak/open-notificaties:1.2.1
+        image: openzaak/open-notificaties:1.2.3
         container_name: open-notificaties
         platform: linux/amd64
         ports:
@@ -297,6 +321,8 @@ services:
             # Needed for Celery Flower to match the TIME_ZONE configured in the
             # settings used by workers and beat containers.
             - TZ=Europe/Amsterdam
+            - TWO_FACTOR_FORCE_OTP_ADMIN=False
+            - TWO_FACTOR_PATCH_ADMIN=False
         volumes:
             - ./imports/open-formulieren/private_media:/app/private_media
         ports:

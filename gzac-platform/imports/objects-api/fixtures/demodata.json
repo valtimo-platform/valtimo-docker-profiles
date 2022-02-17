@@ -36,6 +36,15 @@
         }
     },
     {
+        "model": "core.objecttype",
+        "pk": 5,
+        "fields": {
+            "service": 1,
+            "uuid": "3e852115-277a-4570-873a-9a64be3aeb34",
+            "_name": "Taak"
+        }
+    },
+    {
         "model": "core.object",
         "pk": 1,
         "fields": {
@@ -844,6 +853,15 @@
         "fields": {
             "token_auth": "d667fec15cd7db980730dd843836604e638d1295",
             "object_type": 4,
+            "mode": "read_and_write"
+        }
+    },
+    {
+        "model": "token.permission",
+        "pk": 5,
+        "fields": {
+            "token_auth": "182c13e2209161852c53cef53a879f7a2f923430",
+            "object_type": 5,
             "mode": "read_and_write"
         }
     },
