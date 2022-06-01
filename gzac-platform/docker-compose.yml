@@ -34,6 +34,16 @@ services:
             - POSTGRES_USER=${DB_USER:-keycloak}
             - POSTGRES_PASSWORD=${DB_PASSWORD:-keycloak}
 
+    gzac-portal-db:
+        image: postgres:14.1
+        container_name: gzac-portal-db
+        ports:
+            - "54330:5432"
+        environment:
+            - POSTGRES_USER=${DB_USER:-valtimo}
+            - POSTGRES_PASSWORD=${DB_PASSWORD:-valtimo}
+            - POSTGRES_DB=gzac-portal-db
+
 
     # Valtimo services
 
