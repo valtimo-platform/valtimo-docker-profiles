@@ -1872,6 +1872,7 @@
                         "kvk": "82395551",
                         "verwerker_taak_id": "18af0b6a-967b-4f81-bb8e-a44988e0c2f0",
                         "formulier_id": "Formulier123",
+                        "title": "Check loan",
                         "data": {
                             "voornaam": "Jan",
                             "achternaam": "Smit",
@@ -1901,6 +1902,9 @@
                         "format": "uuid"
                     },
                     "formulier_id": {
+                        "type": "string"
+                    },
+                    "title": {
                         "type": "string"
                     },
                     "data": {
