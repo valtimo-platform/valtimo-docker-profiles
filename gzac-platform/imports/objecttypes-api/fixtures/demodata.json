@@ -1872,6 +1872,7 @@
                         "kvk": "82395551",
                         "verwerker_taak_id": "18af0b6a-967b-4f81-bb8e-a44988e0c2f0",
                         "formulier_id": "Formulier123",
+                        "formulier_url": "http://localhost:8010/api/v2/objects/4e40fb4c-a29a-4e48-944b-c34a1ff6c8f4",
                         "title": "Check loan",
                         "data": {
                             "voornaam": "Jan",
@@ -1902,6 +1903,9 @@
                         "format": "uuid"
                     },
                     "formulier_id": {
+                        "type": "string"
+                    },
+                    "formulier_url": {
                         "type": "string"
                     },
                     "title": {
@@ -1955,13 +1959,104 @@
                         ]
                     },
                     {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "formulier_id"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "formulier_url"
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "required": [
                             "verwerker_taak_id",
-                            "formulier_id",
                             "status"
                         ]
                     }
                 ]
+            },
+            "status": "draft"
+        }
+    },
+    {
+        "model": "core.objecttype",
+        "pk": 6,
+        "fields": {
+            "uuid": "4b5f4fba-0746-11ed-b939-0242ac120002",
+            "name": "formio",
+            "name_plural": "formio",
+            "description": "FormIO",
+            "data_classification": "intern",
+            "maintainer_organization": "Den Haag",
+            "maintainer_department": "",
+            "contact_person": "",
+            "contact_email": "",
+            "source": "",
+            "update_frequency": "unknown",
+            "provider_organization": "",
+            "documentation_url": "",
+            "labels": {},
+            "created_at": "2022-07-19",
+            "modified_at": "2022-07-19"
+        }
+    },
+    {
+        "model": "core.objectversion",
+        "pk": 13,
+        "fields": {
+            "object_type": 6,
+            "version": 1,
+            "created_at": "2022-07-19",
+            "modified_at": "2022-07-19",
+            "published_at": "2022-07-19",
+            "json_schema": {
+                "title": "ObjectType FormIO",
+                "type": "object",
+                "examples": [
+                    {
+                        "formDefinition":{
+                            "display":"form",
+                            "settings":{
+                                "pdf":{
+                                    "id":"1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+                                    "src":"https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+                                }
+                            },
+                            "components":[
+                                {
+                                    "label":"Firstname",
+                                    "tableView":true,
+                                    "key":"firstname",
+                                    "type":"textfield",
+                                    "input":true
+                                },
+                                {
+                                    "type":"button",
+                                    "label":"Send",
+                                    "key":"submit",
+                                    "disableOnInvalid":true,
+                                    "input":true,
+                                    "tableView":false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "required":[
+                    "formDefinition"
+                ],
+                "properties":{
+                    "formDefinition":{
+                        "type":"object",
+                        "additionalProperties":true
+                    },
+                    "additionalProperties":false
+                }
             },
             "status": "draft"
         }

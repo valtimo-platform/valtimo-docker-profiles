@@ -45,6 +45,15 @@
         }
     },
     {
+        "model": "core.objecttype",
+        "pk": 6,
+        "fields": {
+            "service": 1,
+            "uuid": "4b5f4fba-0746-11ed-b939-0242ac120002",
+            "_name": "FormIO"
+        }
+    },
+    {
         "model": "core.object",
         "pk": 1,
         "fields": {
@@ -862,6 +871,15 @@
         "fields": {
             "token_auth": "182c13e2209161852c53cef53a879f7a2f923430",
             "object_type": 5,
+            "mode": "read_and_write"
+        }
+    },
+    {
+        "model": "token.permission",
+        "pk": 6,
+        "fields": {
+            "token_auth": "182c13e2209161852c53cef53a879f7a2f923430",
+            "object_type": 6,
             "mode": "read_and_write"
         }
     },
