@@ -17,8 +17,8 @@ services:
     valtimo-portal-keycloak:
         container_name: valtimo-portal-keycloak
         depends_on:
-            - valtimo-portal-keycloak-db
-        image: jboss/keycloak:15.0.0
+            - valtimo-portal-keycloak -db
+        image: sleighzy/keycloak:15.0.2-arm64
         volumes:
             - ./imports/keycloak:/opt/jboss/keycloak/imports
             - ./imports/keycloak/exports:/opt/jboss/keycloak/exports
@@ -76,7 +76,7 @@ services:
         container_name: valtimo-core-keycloak
         depends_on:
             - valtimo-core-keycloak-db
-        image: jboss/keycloak:15.0.0
+        image: sleighzy/keycloak:15.0.2-arm64
         volumes:
             - ./imports/keycloak:/opt/jboss/keycloak/imports
             - ./imports/keycloak/exports:/opt/jboss/keycloak/exports
