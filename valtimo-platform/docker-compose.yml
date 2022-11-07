@@ -17,7 +17,7 @@ services:
     valtimo-portal-keycloak:
         container_name: valtimo-portal-keycloak
         depends_on:
-            - valtimo-portal-keycloak -db
+            - valtimo-portal-keycloak-db
         image: quay.io/keycloak/keycloak:17.0.1-legacy
         volumes:
             - ./imports/keycloak:/opt/jboss/keycloak/imports
