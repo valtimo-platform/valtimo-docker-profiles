@@ -1,23 +1,26 @@
 package opa.test
 
-user_role_policy = response {
-    input.name
-    response := {
-        "roles": UserRoles
-    }
-}
-
-UserRoles = resp {
-    input.name = "garrus"
-    resp := ["tech", "crew"]
-}
-
-UserRoles = resp {
-    input.name = "shepard"
-    resp := ["commander", "crew"]
-}
-
 document_search_filter = { "createdBy": [ createdBy ] } {
     [_, payload, _] := io.jwt.decode(input.token)
     createdBy := payload.email
+}
+
+
+default document_feature = false
+
+document_feature = result {
+    input.data.feature = "view"
+    result := true
+}
+
+document_feature = result {
+    input.data.feature = "create"
+    input.data.documentDefinitionName = "bezwaar"
+
+    [_, payload, _] := io.jwt.decode(input.token)
+    result := containsIn(payload.realm_access.roles, "ROLE_ADMIN")
+}
+
+containsIn(roles, role) {
+    roles[_] = role
 }
