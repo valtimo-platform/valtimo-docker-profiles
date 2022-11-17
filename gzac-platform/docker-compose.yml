@@ -6,7 +6,7 @@ services:
         container_name: gzac-portal-keycloak
         depends_on:
             - gzac-portal-keycloak-db
-        image: jboss/keycloak:15.1.1
+        image: quay.io/keycloak/keycloak:17.0.1-legacy
         volumes:
             - ./imports/keycloak:/opt/jboss/keycloak/imports
             - ./imports/keycloak/exports:/opt/jboss/keycloak/exports
@@ -88,7 +88,7 @@ services:
         container_name: valtimo-core-keycloak
         depends_on:
             - valtimo-core-keycloak-db
-        image: jboss/keycloak:15.1.1
+        image: quay.io/keycloak/keycloak:17.0.1-legacy
         volumes:
             - ./imports/keycloak:/opt/jboss/keycloak/imports
             - ./imports/keycloak/exports:/opt/jboss/keycloak/exports
@@ -102,7 +102,6 @@ services:
             DB_ADDR: valtimo-core-keycloak-db
             DB_USER: keycloak
             DB_PASSWORD: keycloak
-
     valtimo-core-keycloak-db:
         image: postgres:14.1
         container_name: valtimo-core-keycloak-db
