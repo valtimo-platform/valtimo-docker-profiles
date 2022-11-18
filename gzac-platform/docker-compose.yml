@@ -71,6 +71,18 @@ services:
         volumes:
             - gzac-core-db-data:/var/lib/mysql # persist data even if container shuts down
 
+    gzac-core-db-postgres:
+        container_name: gzac-core-db-postgres
+        image: postgres:14.1
+        ports:
+            - "5444:5432"
+        environment:
+            POSTGRES_USER: gzac
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: gzac-core-db
+        volumes:
+            - gzac-core-db-data-postgres:/var/lib/postgres # persist data even if container shuts down
+
     valtimo-core-keycloak:
         container_name: valtimo-core-keycloak
         depends_on:
@@ -418,3 +430,4 @@ services:
 
 volumes:
     gzac-core-db-data: #enabled persistence
+    gzac-core-db-data-postgres: #enabled persistence

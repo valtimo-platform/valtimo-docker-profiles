@@ -72,6 +72,18 @@ services:
         volumes:
             - valtimo-core-db-data:/var/lib/mysql # persist data even if container shuts down
 
+    valtimo-core-db-postgres:
+        container_name: valtimo-core-db-postgres
+        image: postgres:14.1
+        ports:
+            - "5433:5432"
+        environment:
+            POSTGRES_USER: valtimo
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: valtimo-core-db
+        volumes:
+            - valtimo-core-db-data-postgres:/var/lib/postgres # persist data even if container shuts down
+
     valtimo-core-keycloak:
         container_name: valtimo-core-keycloak
         depends_on:
@@ -118,4 +130,5 @@ services:
 
 volumes:
     valtimo-core-db-data: #enabled persistence
+    valtimo-core-db-data-postgres: #enabled persistence
     valtimo-portal-db-data:
