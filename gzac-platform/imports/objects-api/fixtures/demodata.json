@@ -884,6 +884,15 @@
         }
     },
     {
+        "model": "token.permission",
+        "pk": 7,
+        "fields": {
+            "token_auth": "182c13e2209161852c53cef53a879f7a2f923430",
+            "object_type": 1,
+            "mode": "read_and_write"
+        }
+    },
+    {
         "model": "zgw_consumers.service",
         "pk": 1,
         "fields": {

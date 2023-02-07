@@ -113,7 +113,7 @@ services:
     # Common ground VNG services
 
     openzaak:
-        image: openzaak/open-zaak:1.5.0
+        image: openzaak/open-zaak:1.8.1
         container_name: openzaak
         platform: linux/amd64
         environment:
@@ -166,7 +166,7 @@ services:
     # Objects-Api
 
     objects-api:
-        image: maykinmedia/objects-api:2.0.0
+        image: maykinmedia/objects-api:2.1.1
         container_name: objects-api
         platform: linux/amd64
         ports:
@@ -184,7 +184,7 @@ services:
             - database-objects-api
 
     objects-api-import:
-        image: maykinmedia/objects-api:2.0.0
+        image: maykinmedia/objects-api:2.1.1
         container_name: objects-api-import
         platform: linux/amd64
         environment: *objects-env
@@ -207,7 +207,7 @@ services:
             - POSTGRES_PASSWORD=${DB_PASSWORD:-objects}
 
     objecttypes-api:
-        image: maykinmedia/objecttypes-api:1.1.1
+        image: maykinmedia/objecttypes-api:2.1.0
         container_name: objecttypes-api
         platform: linux/amd64
         ports:
@@ -225,7 +225,7 @@ services:
             - database-objecttypes-api
 
     objecttypes-api-import:
-        image: maykinmedia/objecttypes-api:1.1.1
+        image: maykinmedia/objecttypes-api:2.1.0
         container_name: objecttypes-api-import
         platform: linux/amd64
         environment: *objecttypes-env
@@ -248,7 +248,7 @@ services:
     # Open notificaties
 
     open-notificaties:
-        image: openzaak/open-notificaties:1.2.3
+        image: openzaak/open-notificaties:1.4.3
         container_name: open-notificaties
         platform: linux/amd64
         ports:
@@ -273,7 +273,7 @@ services:
             - CELERY_WORKER_CONCURRENCY=${CELERY_WORKER_CONCURRENCY:-4}
 
     open-notificaties-celery:
-        image: openzaak/open-notificaties:1.2.1
+        image: openzaak/open-notificaties:1.4.3
         container_name: open-notificaties-celery
         platform: linux/amd64
         environment: *notificaties-env
@@ -313,14 +313,14 @@ services:
         container_name: redis-open-forms
 
     sdk-open-forms:
-        image: openformulieren/open-forms-sdk:sprint-10
+        image: openformulieren/open-forms-sdk:1.2.5
         container_name: sdk-open-forms
         platform: linux/amd64
         ports:
             - "8005:80"
 
     web-open-forms:
-        image: openformulieren/open-forms:sprint-10
+        image: openformulieren/open-forms:2.0.3
         container_name: web-open-forms
         platform: linux/amd64
         environment: &web_env
@@ -353,7 +353,7 @@ services:
             - sdk-open-forms
 
     celery-open-forms:
-        image: openformulieren/open-forms:sprint-10
+        image: openformulieren/open-forms:2.0.3
         container_name: celery-open-forms
         platform: linux/amd64
         environment: *web_env
@@ -365,7 +365,7 @@ services:
             - redis-open-forms
 
     celery-beat:
-        image: openformulieren/open-forms:sprint-10
+        image: openformulieren/open-forms:2.0.3
         container_name: celery-beat
         platform: linux/amd64
         environment: *web_env
