@@ -113,7 +113,7 @@ services:
     # Common ground VNG services
 
     openzaak:
-        image: openzaak/open-zaak:1.8.1
+        image: openzaak/open-zaak:1.7.5
         container_name: openzaak
         platform: linux/amd64
         environment:
