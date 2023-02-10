@@ -1879,6 +1879,10 @@
                         "verwerker_taak_id": "18af0b6a-967b-4f81-bb8e-a44988e0c2f0",
                         "formulier_id": "Formulier123",
                         "formulier_url": "http://localhost:8010/api/v2/objects/4e40fb4c-a29a-4e48-944b-c34a1ff6c8f4",
+                        "formulier": {
+                            "type:": "url",
+                            "value": "http://localhost:8010/api/v2/objects/4e40fb4c-a29a-4e48-944b-c34a1ff6c8f4"
+                        },
                         "title": "Check loan",
                         "data": {
                             "voornaam": "Jan",
@@ -1905,16 +1909,13 @@
                         "pattern": "^[0-9]+$"
                     },
                     "identificatie": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string"
-                                },
-                                "value": {
-                                    "type": "string"
-                                }
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
                             }
                         }
                     },
@@ -1941,6 +1942,21 @@
                             }
                         },
                         "additionalProperties": false
+                    },
+                    "formulier": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "id",
+                                    "object"
+                                ],
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
                     },
                     "verzonden_data": {
                         "type": "object",
@@ -1993,6 +2009,11 @@
                             {
                                 "required": [
                                     "formulier_url"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "formulier"
                                 ]
                             }
                         ]
