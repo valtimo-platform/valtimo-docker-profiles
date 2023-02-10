@@ -1871,7 +1871,7 @@
                         "bsn": "123456782",
                         "kvk": "82395551",
                         "identificatie": {
-                            "type": "bsn",
+                            "type": "BSN",
                             "value": "82395551"
                         },
                         "verwerker_taak_id": "18af0b6a-967b-4f81-bb8e-a44988e0c2f0",
