@@ -1870,12 +1870,10 @@
                     {
                         "bsn": "123456782",
                         "kvk": "82395551",
-                        "identificatie": [
-                            {
-                                "type": "bsn",
-                                "value": "82395551"
-                            }
-                        ],
+                        "identificatie": {
+                            "type": "bsn",
+                            "value": "82395551"
+                        },
                         "verwerker_taak_id": "18af0b6a-967b-4f81-bb8e-a44988e0c2f0",
                         "formulier_id": "Formulier123",
                         "formulier_url": "http://localhost:8010/api/v2/objects/4e40fb4c-a29a-4e48-944b-c34a1ff6c8f4",
