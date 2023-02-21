@@ -83,10 +83,10 @@ services:
         volumes:
             - gzac-core-db-data-postgres:/var/lib/postgres # persist data even if container shuts down
 
-    valtimo-core-keycloak:
-        container_name: valtimo-core-keycloak
+    gzac-core-keycloak:
+        container_name: gzac-core-keycloak
         depends_on:
-            - valtimo-core-keycloak-db
+            - gzac-core-keycloak-db
         image: quay.io/keycloak/keycloak:17.0.1-legacy
         volumes:
             - ./imports/keycloak:/opt/jboss/keycloak/imports
@@ -98,12 +98,12 @@ services:
             KEYCLOAK_PASSWORD: admin
             KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/core-realm-valtimo.json
             DB_VENDOR: postgres
-            DB_ADDR: valtimo-core-keycloak-db
+            DB_ADDR: gzac-core-keycloak-db
             DB_USER: keycloak
             DB_PASSWORD: keycloak
-    valtimo-core-keycloak-db:
+    gzac-core-keycloak-db:
         image: postgres:14.1
-        container_name: valtimo-core-keycloak-db
+        container_name: gzac-core-keycloak-db
         ports:
             - "54329:5432"
         environment:

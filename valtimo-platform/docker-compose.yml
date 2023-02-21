@@ -2,18 +2,6 @@ version: '3.9'
 services:
 
     # Portal services
-    valtimo-portal-db:
-        image: "postgres" # use latest official postgres version
-        container_name: valtimo-portal-db
-        ports:
-            - "5432:5432"
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=test
-            - POSTGRES_DB=valtimo-portal-db
-        volumes:
-            - valtimo-portal-db-data:/var/lib/postgresql/data/ # persist data even if container shuts down
-
     valtimo-portal-keycloak:
         container_name: valtimo-portal-keycloak
         depends_on:
@@ -27,30 +15,41 @@ services:
         environment:
             KEYCLOAK_USER: admin
             KEYCLOAK_PASSWORD: admin
-            KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/portal-realm-valtimo.json
-            DB_VENDOR: mysql
+            DB_VENDOR: postgres
             DB_ADDR: valtimo-portal-keycloak-db
             DB_USER: keycloak
             DB_PASSWORD: keycloak
+        command:
+            - "-Dkeycloak.migration.action=import"
+            - "-Dkeycloak.migration.provider=singleFile"
+            - "-Dkeycloak.migration.file=/opt/jboss/keycloak/imports/portal-realm-valtimo.json"
+            - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
 
     valtimo-portal-keycloak-db:
+        image: postgres:14.1
         container_name: valtimo-portal-keycloak-db
-        image: mysql:latest
         ports:
-            - "3307:3306"
-        cap_add:
-            - SYS_NICE  # CAP_SYS_NICE
+            - "54324:5432"
         environment:
-            MYSQL_ROOT_PASSWORD: rootpassword
-            MYSQL_DATABASE: keycloak
-            MYSQL_USER: keycloak
-            MYSQL_PASSWORD: keycloak
+            - POSTGRES_USER=${DB_USER:-keycloak}
+            - POSTGRES_PASSWORD=${DB_PASSWORD:-keycloak}
+
+    valtimo-portal-db:
+        image: postgres:14.1
+        container_name: valtimo-portal-db
+        ports:
+            - "54325:5432"
+        environment:
+            - POSTGRES_USER=${DB_USER:-valtimo}
+            - POSTGRES_PASSWORD=${DB_PASSWORD:-valtimo}
+            - POSTGRES_DB=valtimo-portal-db
+
 
     # Valtimo services
 
     valtimo-core-db:
         container_name: valtimo-core-db
-        image: mysql:5.7
+        image: mysql/mysql-server:8.0.28-1.2.7-server
         ports:
             - "3306:3306"
         environment:
@@ -98,23 +97,19 @@ services:
             KEYCLOAK_USER: admin
             KEYCLOAK_PASSWORD: admin
             KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/core-realm-valtimo.json
-            DB_VENDOR: mysql
+            DB_VENDOR: postgres
             DB_ADDR: valtimo-core-keycloak-db
             DB_USER: keycloak
             DB_PASSWORD: keycloak
 
     valtimo-core-keycloak-db:
+        image: postgres:14.1
         container_name: valtimo-core-keycloak-db
-        image: mysql:latest
         ports:
-            - "3308:3306"
-        cap_add:
-            - SYS_NICE  # CAP_SYS_NICE
+            - "54329:5432"
         environment:
-            MYSQL_ROOT_PASSWORD: rootpassword
-            MYSQL_DATABASE: keycloak
-            MYSQL_USER: keycloak
-            MYSQL_PASSWORD: keycloak
+            - POSTGRES_USER=${DB_USER:-keycloak}
+            - POSTGRES_PASSWORD=${DB_PASSWORD:-keycloak}
 
     # Global service portal<>valtimo
 
@@ -131,4 +126,3 @@ services:
 volumes:
     valtimo-core-db-data: #enabled persistence
     valtimo-core-db-data-postgres: #enabled persistence
-    valtimo-portal-db-data:
