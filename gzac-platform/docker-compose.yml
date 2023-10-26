@@ -153,15 +153,15 @@ services:
 
     # Additional services
 
-    rabbitmq:
-        image: rabbitmq:3.9-management
-        container_name: rabbitmq
-        expose:
-            - 5673
-            - 15673
+    valtimo-rabbitmq:
+        image: rabbitmq:3-management
+        container_name: valtimo-rabbitmq
+        volumes:
+            - ./imports/valtimo-rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+            - ./imports/valtimo-rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
         ports:
-            - "5673:5673"
-            - "15673:15673"
+            - "5672:5672"
+            - "15672:15672"
 
     # Objects-Api
 
@@ -246,6 +246,15 @@ services:
             - POSTGRES_PASSWORD=${DB_PASSWORD:-objecttypes}
 
     # Open notificaties
+    open-notificaties-rabbitmq:
+        image: rabbitmq:3.9-management
+        container_name: open-notificaties-rabbitmq
+        expose:
+            - 5673
+            - 15673
+        ports:
+            - "5673:5673"
+            - "15673:15673"
 
     open-notificaties:
         image: openzaak/open-notificaties:1.4.3
@@ -265,7 +274,7 @@ services:
             - DB_USER=notifications
             - DB_PASSWORD=notifications
             - DEBUG=true
-            - RABBITMQ_HOST=rabbitmq
+            - RABBITMQ_HOST=open-notificaties-rabbitmq
             - PUBLISH_BROKER_URL=redis://redis-open-notificaties:6379/0
             - CELERY_BROKER_URL=redis://redis-open-notificaties:6379/0
             - CELERY_RESULT_BACKEND=redis://redis-open-notificaties:6379/0
